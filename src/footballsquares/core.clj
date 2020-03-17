@@ -3,6 +3,7 @@
 
 (load "score")
 (load "player")
+(load "printing")
 
 (defn -main [& args]
     (let [home (first args)
