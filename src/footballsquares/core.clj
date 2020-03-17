@@ -1,5 +1,6 @@
 (ns footballsquares.core
-    (:require [clojure.string :as s]))
+  (:gen-class)
+  (:require [clojure.string :as s]))
 
 (defn- pretty-keyword [k]
   (let [s (format "%s" k)
