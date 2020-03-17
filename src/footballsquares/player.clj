@@ -14,10 +14,15 @@
                           (println (aget c x y))
                           (print (aget c x y)))))))))
 
-(defn pretty-keyword [k]
+(defn- pretty-keyword [k]
   (let [s (format "%s" k)
         i (inc (s/index-of s "/"))]
     (subs s i)))
+
+(defn- ones-digit [x] (rem x 10))
+
+(defn- who-has [home away sqrs]
+  (s/trim (aget sqrs (ones-digit home) (ones-digit away))))
 
 (defn print-squares [{{{h-n :name h-s :score} :home
                        {a-n :name a-s :score} :away} :teams
@@ -30,7 +35,7 @@
     (println "^")
     (println "|")
     (println (str a-n ": " a-points))
-    (println (str "Winner: " (s/trim (aget board h-points a-points))))
+    (println (str "Winner: " (who-has h-points a-points board)))
     (println (str h-n ":" (pr-str (map pretty-keyword h-s))))
     (println (str a-n ":" (pr-str (map pretty-keyword a-s))))))
 
@@ -52,9 +57,3 @@
       (into coll (repeat num-charity (pad "CHARITY"))))))
 
 (def squares (comp populate-squares shuffle add-charity expand-players))
-
-(defn- ones-digit [x] (rem x 10))
-
-(defn who-has [home away sqrs]
-  (aget sqrs (ones-digit (total-points home)) (ones-digit (total-points away))))
-
