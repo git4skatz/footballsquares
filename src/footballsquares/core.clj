@@ -5,16 +5,17 @@
 (load "player")
 (load "printing")
 
+(defn init-game [[home away & players]]
+  {home   :home
+   away   :away
+   :teams {:home {:name  home
+                  :score '()}
+           :away {:name  away
+                  :score '()}}
+   :board (squares players)})
+
 (defn -main [& args]
-    (let [home (first args)
-          away (first (rest args))
-          game {home :home
-                away :away
-                :teams {:home {:name  home
-                               :score '()}
-                        :away {:name  away
-                               :score '()}}
-                :board (squares (nthrest args 2))}
+    (let [game (init-game args)
           play-game (fn [c g]
                         (let [cmd (s/split c #" ")
                               new-game (condp = (first cmd)
