@@ -27,7 +27,7 @@
   (let [[last-score] current-scores]
     (filter (partial score-allowed-1? last-score) (keys scores->points))))
 
-(defn score
+(defn- score
   ([s] (score s '()))
   ([s current-scores]
    (if (and (contains? scores->points s) (score-allowed? current-scores s))
@@ -45,5 +45,3 @@
         current-score (get-in g [:teams team :score])
         new-score (if (empty? current-score) current-score (rest current-score))]
     (assoc-in g [:teams team :score] new-score)))
-
-

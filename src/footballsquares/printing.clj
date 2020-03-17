@@ -11,14 +11,9 @@
                           (println (aget c x y))
                           (print (aget c x y)))))))))
 
-(defn- pretty-keyword [k]
-  (let [s (format "%s" k)
-        i (inc (s/index-of s "/"))]
-    (subs s i)))
-
-(defn print-squares [{{{h-n :name h-s :score} :home
-                       {a-n :name a-s :score} :away} :teams
-                      board                          :board}]
+(defn- print-squares [{{{h-n :name h-s :score} :home
+                        {a-n :name a-s :score} :away} :teams
+                       board                          :board}]
   (let [h-points (total-points h-s)
         a-points (total-points a-s)]
     (header)
@@ -28,5 +23,6 @@
     (println "|")
     (println (str a-n ": " a-points))
     (println (str "Winner: " (who-has h-points a-points board)))
-    (println (str h-n ":" (pr-str (map pretty-keyword h-s))))
-    (println (str a-n ":" (pr-str (map pretty-keyword a-s))))))
+    (println (str h-n ":" (pr-str (reverse (map pretty-keyword h-s))) "\n  " (pr-str (project :home h-s a-points board))))
+    (println (str a-n ":" (pr-str (reverse (map pretty-keyword a-s))) "\n  " (pr-str (project :away a-s h-points board))))))
+

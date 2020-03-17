@@ -25,4 +25,13 @@
       coll
       (into coll (repeat num-charity (pad "CHARITY"))))))
 
+(defn- project [who scores opp-points board]
+  (let [possible (valid-scores scores)
+        mapper (fn [s]
+                 (list (pretty-keyword s)
+                       (if (= who :home)
+                         (who-has (total-points (conj scores s)) opp-points board)
+                         (who-has opp-points (total-points (conj scores s)) board))))]
+    (map mapper possible)))
+
 (def squares (comp populate-squares shuffle add-charity expand-players))
