@@ -12,6 +12,7 @@ lein run rams saints player1 player2 player3
 score rams touchdown
 score saints safety
 unscore saints
+quit
 ```
 
 ## License
