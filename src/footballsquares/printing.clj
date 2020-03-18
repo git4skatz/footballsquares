@@ -23,6 +23,6 @@
     (println "|")
     (println (str a-n ": " a-points))
     (println (str "Winner: " (who-has h-points a-points board)))
-    (println (str h-n ":" (pr-str (reverse (map pretty-keyword h-s))) "\n  " (pr-str (project :home h-s a-points board))))
-    (println (str a-n ":" (pr-str (reverse (map pretty-keyword a-s))) "\n  " (pr-str (project :away a-s h-points board))))))
+    (println (str h-n ":" (pr-str (reverse (map name h-s))) "\n  " (pr-str (project :home h-s a-points board))))
+    (println (str a-n ":" (pr-str (reverse (map name a-s))) "\n  " (pr-str (project :away a-s h-points board))))))
 

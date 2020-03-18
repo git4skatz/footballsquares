@@ -35,13 +35,11 @@
      current-scores)))
 
 (defn do-score [[t sc] g]
-  (let [team (g t)
-        current-score (get-in g [:teams team :score])
-        new-score (score (keyword "footballsquares.core" sc) current-score)]
-    (assoc-in g [:teams team :score] new-score)))
+  (let [team (g t)]
+    (update-in g [:teams team :score]
+               #(score (keyword "footballsquares.core" sc) %))))
 
 (defn un-score [t g]
-  (let [team (g t)
-        current-score (get-in g [:teams team :score])
-        new-score (if (empty? current-score) current-score (rest current-score))]
-    (assoc-in g [:teams team :score] new-score)))
+  (let [team (g t)]
+    (update-in g [:teams team :score]
+               #(if (empty? %) % (rest %)))))

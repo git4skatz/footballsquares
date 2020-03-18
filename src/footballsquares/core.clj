@@ -2,11 +2,6 @@
   (:gen-class)
   (:require [clojure.string :as s]))
 
-(defn- pretty-keyword [k]
-  (let [s (format "%s" k)
-        i (inc (s/index-of s "/"))]
-    (subs s i)))
-
 (load "score")
 (load "player")
 (load "printing")

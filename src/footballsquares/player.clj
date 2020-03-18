@@ -28,7 +28,7 @@
 (defn- project [who scores opp-points board]
   (let [possible (valid-scores scores)
         mapper (fn [s]
-                 (list (pretty-keyword s)
+                 (list (name s)
                        (if (= who :home)
                          (who-has (total-points (conj scores s)) opp-points board)
                          (who-has opp-points (total-points (conj scores s)) board))))]
