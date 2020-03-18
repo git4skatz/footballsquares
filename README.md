@@ -9,9 +9,10 @@ A Clojure library designed to manage squares for "betting" on football games.
 lein run rams saints player1 player2 player3
 
 ```
-score rams touchdown
-score saints safety
-unscore saints
+rams score touchdown
+rams score failed-extra-point
+saints score safety
+saints unscore
 quit
 ```
 
