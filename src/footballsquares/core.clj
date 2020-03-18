@@ -23,7 +23,7 @@
                    "unscore" (un-score (second cmd) g)
                    "quit" (System/exit 0)
                    g)]
-    (print-squares new-game)
+    (print-game new-game)
     (recur (read-line) new-game)))
 
 (defn -main [& args]
