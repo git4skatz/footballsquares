@@ -10,7 +10,7 @@ lein run rams saints player1 player2 player3
 
 ```
 rams score touchdown
-rams score failed-extra-point
+rams score failed-conversion
 saints score safety
 saints unscore
 quit
