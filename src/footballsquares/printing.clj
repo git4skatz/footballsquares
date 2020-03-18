@@ -1,5 +1,8 @@
 (in-ns 'footballsquares.core)
 
+(defn- pad [x]
+  (format "%10s" x))
+
 (defn- header []
   (doall (map print (map pad '("0" "1" "2" "3" "4" "5" "6" "7" "8" "9")))))
 
@@ -8,8 +11,8 @@
            (do (print y)
                (doall (for [x (range 10)]
                         (if (= x 9)
-                          (println (aget c x y))
-                          (print (aget c x y)))))))))
+                          (println (pad (aget c x y)))
+                          (print (pad (aget c x y))))))))))
 
 (defn- print-squares [{{{h-n :name h-s :score} :home
                         {a-n :name a-s :score} :away} :teams

@@ -16,8 +16,8 @@
    :board (squares players)})
 
 (defn- play-game [c g]
-  (let [inp (s/split c #" ")
-        cmd (if (> (count inp) 1) (cons (second inp) (cons (first inp) (nnext inp))) inp)
+  (let [inp (s/split c #" +")
+        cmd (if (> (count inp) 1) (list* (second inp) (first inp) (nnext inp)) inp)
         new-game (condp = (first cmd)
                    "score" (do-score (rest cmd) g)
                    "unscore" (un-score (second cmd) g)

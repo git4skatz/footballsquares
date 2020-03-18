@@ -4,7 +4,7 @@ A Clojure library designed to manage squares for "betting" on football games.
 
 ## Usage
 
->lein run home-team-name visiting-team-name players*
+>lein run home-team-name visiting-team-name players+
 
 lein run rams saints player1 player2 player3
 
