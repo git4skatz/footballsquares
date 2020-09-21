@@ -1,6 +1,7 @@
+;;Copyright © 2020 Steven Katz
 (ns footballsquares.core
   (:gen-class)
-  (:require [clojure.string :as s]))
+  (:require [clojure.string :as string]))
 
 (load "score")
 (load "player")
@@ -16,7 +17,7 @@
    :board (squares players)})
 
 (defn- play-game [c g]
-  (let [inp (s/split c #" +")
+  (let [inp (string/split c #" +")
         cmd (if (> (count inp) 1) (list* (second inp) (first inp) (nnext inp)) inp)
         new-game (condp = (first cmd)
                    "score" (do-score (rest cmd) g)

@@ -1,3 +1,4 @@
+;;Copyright © 2020 Steven Katz
 (in-ns 'footballsquares.core)
 
 (def scores->points {::touchdown            6
@@ -11,23 +12,27 @@
                                        ::two-point-conversion
                                        ::failed-conversion})
 
-(defn total-points [current-scores]
+(defn total-points "Convert scores to values and sum"
+  [current-scores]
   (reduce + (map scores->points current-scores)))
 
-(defn- score-allowed-1? [last-score s]
+(defn- score-allowed-touchdown? "Is a score allowed"
+  [last-score s]
   (if (= last-score ::touchdown)
     (contains? must-follow-touchdown s)
     (not (contains? must-follow-touchdown s))))
 
-(defn- score-allowed? [current-scores s]
+(defn- score-allowed? "Is a score allowed"
+  [current-scores s]
   (let [[last-score] current-scores]
-    (score-allowed-1? last-score s)))
+    (score-allowed-touchdown? last-score s)))
 
-(defn valid-scores [current-scores]
+(defn valid-scores "Get list of valid next scores"
+  [current-scores]
   (let [[last-score] current-scores]
-    (filter (partial score-allowed-1? last-score) (keys scores->points))))
+    (filter (partial score-allowed-touchdown? last-score) (keys scores->points))))
 
-(defn- score
+(defn- score "Add score to list of scores"
   ([s] (score s '()))
   ([s current-scores]
    (if (and (contains? scores->points s) (score-allowed? current-scores s))

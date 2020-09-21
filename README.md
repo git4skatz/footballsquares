@@ -1,12 +1,17 @@
 # footballsquares
 
 A Clojure library designed to manage squares for "betting" on football games.
+Squares are assigned in equal numbers based onteh number of players. Any 
+"left over" squares are assigned to "CHARITY".
+
+The value proposition of this code is the ability to answer the question "Who
+will win if team X scores a ______?"
 
 ## Usage
 
 >lein run home-team-name visiting-team-name players+
 
-lein run rams saints player1 player2 player3
+lein run rams saints player1 player2 player3...playerN
 
 ```
 rams score touchdown
