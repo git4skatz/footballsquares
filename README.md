@@ -1,7 +1,7 @@
 # footballsquares
 
-A Clojure library designed to manage squares for "betting" on football games.
-Squares are assigned in equal numbers based onteh number of players. Any 
+A Clojure library/program designed to manage squares for "betting" on football games.
+Squares are assigned in equal numbers based on the number of players. Any 
 "left over" squares are assigned to "CHARITY".
 
 The value proposition of this code is the ability to answer the question "Who
