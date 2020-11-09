@@ -16,21 +16,18 @@
   [current-scores]
   (reduce + (map scores->points current-scores)))
 
-(defn- score-allowed-touchdown? "Is a score allowed"
-  [last-score s]
-  (if (= last-score ::touchdown)
-    (contains? must-follow-touchdown s)
-    (not (contains? must-follow-touchdown s))))
-
 (defn- score-allowed? "Is a score allowed"
-  [current-scores s]
-  (let [[last-score] current-scores]
-    (score-allowed-touchdown? last-score s)))
+  [ps s]
+  (let [previous-score (if (keyword? ps)
+                         ps (first ps))]
+    (if (= previous-score ::touchdown)
+      (contains? must-follow-touchdown s)
+      (not (contains? must-follow-touchdown s)))))
 
 (defn valid-scores "Get list of valid next scores"
   [current-scores]
   (let [[last-score] current-scores]
-    (filter (partial score-allowed-touchdown? last-score) (keys scores->points))))
+    (filter (partial score-allowed? last-score) (keys scores->points))))
 
 (defn- score "Add score to list of scores"
   ([s] (score s '()))
