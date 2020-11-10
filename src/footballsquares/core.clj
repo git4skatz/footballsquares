@@ -19,7 +19,7 @@
 (defn- play-game [c g]
   (let [inp (string/split c #" +")
         cmd (if (> (count inp) 1) (list* (second inp) (first inp) (nnext inp)) inp)
-        new-game (condp = (first cmd)
+        new-game (case (first cmd)
                    "score" (do-score (rest cmd) g)
                    "unscore" (un-score (second cmd) g)
                    "quit" (System/exit 0)
@@ -30,5 +30,5 @@
 (defn -main [& args]
   (when (< (count args) 3)
     (println "You must supply: home-team-name visiting-team-name players*")
-    (System/exit -1))
+    (System/exit 1))
   (play-game "print" (init-game args)))

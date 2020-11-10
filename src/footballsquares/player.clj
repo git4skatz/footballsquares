@@ -8,23 +8,26 @@
   (aget sqrs (ones-digit home) (ones-digit away)))
 
 (defn- populate-squares "Convert 1-d to 2-d structure"
-  [coll] {:pre [(= 100 (count coll))]}
-  (to-array-2d (partition 10 coll)))
+  [xs]
+  {:pre [(= 100 (count xs))]}
+  (to-array-2d (partition 10 xs)))
 
 (defn- expand-players "List of players names repeated in equal amounts"
-  [coll] {:pre [(< 0 (count coll) 101)]}
-  (let [num-players (count coll)
+  [xs]
+  {:pre [(< 0 (count xs) 101)]}
+  (let [num-players (count xs)
         num-each (quot 100 num-players)]
     (if (= 100 num-players)
-      coll
-      (mapcat (partial repeat num-each) coll))))
+      xs
+      (mapcat (partial repeat num-each) xs))))
 
 (defn- add-charity "Add the correct number of CHARITY markers"
-  [coll] {:pre [(< 0 (count coll) 101)]}
-  (let [num-charity (- 100 (count coll))]
+  [xs]
+  {:pre [(< 0 (count xs) 101)]}
+  (let [num-charity (- 100 (count xs))]
     (if (= 0 num-charity)
-      coll
-      (into coll (repeat num-charity "CHARITY")))))
+      xs
+      (into xs (repeat num-charity "CHARITY")))))
 
 (defn- predict "Determine winner for next possible scores"
   [who scores opp-points board]
