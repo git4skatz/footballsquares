@@ -19,9 +19,10 @@
 (defn- play-game [c g]
   (let [inp (string/split c #" +")
         cmd (if (> (count inp) 1) (list* (second inp) (first inp) (nnext inp)) inp)
-        new-game (case (first cmd)
-                   "score" (do-score (rest cmd) g)
-                   "unscore" (un-score (second cmd) g)
+        action (first cmd)
+        new-game (case action
+                   "score" (update g :teams do-score (g (second cmd)) (keyword "footballsquares.core" (nth cmd 2)))
+                   "unscore" (update g :teams un-score (g (second cmd)))
                    "quit" (System/exit 0)
                    g)]
     (print-game new-game)
