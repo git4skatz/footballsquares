@@ -20,13 +20,19 @@
   (let [inp (string/split c #" +")
         cmd (if (> (count inp) 1) (list* (second inp) (first inp) (nnext inp)) inp)
         action (first cmd)
-        new-game (case action
-                   "score" (update g :teams do-score (g (second cmd)) (keyword "footballsquares.core" (nth cmd 2)))
-                   "unscore" (update g :teams un-score (g (second cmd)))
+        result (case action
+                   "score" [nil (update g :teams do-score (g (second cmd)) (keyword "footballsquares.core" (nth cmd 2)))]
+                   "unscore" [nil (update g :teams un-score (g (second cmd)))]
                    "quit" (System/exit 0)
-                   g)]
-    (print-game new-game)
-    (recur (read-line) new-game)))
+                   "print" [nil g]
+                   "help" ["<team-name> score <score-type>\n<team-name> unscore\nquit\nhelp" g]
+                   [(str action " is invalid input") g])
+        game (result 1)
+        message (result 0)]
+    (if message
+      (println message)
+      (print-game game))
+    (recur (do (print "> ") (flush) (read-line)) game)))
 
 (defn -main [& args]
   (when (< (count args) 3)
