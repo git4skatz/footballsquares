@@ -3,7 +3,11 @@
   (:require [clojure.test :refer :all]
             [footballsquares.core :refer :all :as fb]))
 
+(def basegame (init-game ["pats" "bills" "steve" "tricia" "don"]))
+
 (deftest scoretest
   (testing "Building scores"
-    (is (= (score ::fb/touchdown) '(::fb/touchdown)) "Empty to touchdown")
-    (is (= (score ::fb/extra-point (score ::fb/touchdown)) '(::fb/extra-point ::fb/touchdown))) "Extra point after touchdown"))
+    (is (= {::fb/home {::fb/score '(::fb/touchdown)}}
+           (do-score {::fb/home {::fb/score '()}} ::fb/home ::fb/touchdown)) "Empty to touchdown [home]")
+    (is (= {::fb/away {::fb/score '(::fb/touchdown)}}
+           (do-score {::fb/away {::fb/score '()}} ::fb/away ::fb/touchdown)) "Empty to touchdown [away]")))

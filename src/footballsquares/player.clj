@@ -3,7 +3,7 @@
 
 (defn- ones-digit [x] (rem x 10))
 
-(defn- who-has "Find out who has the given square"
+(defn who-has "Find out who has the given square"
   [home away sqrs]
   (aget sqrs (ones-digit home) (ones-digit away)))
 
@@ -29,12 +29,12 @@
       xs
       (into xs (repeat num-charity "CHARITY")))))
 
-(defn- predict "Determine winner for next possible scores"
+(defn predict "Determine winner for next possible scores"
   [who scores opp-points board]
   (let [possible (valid-scores scores)
         mapper (fn [s]
                  (list (name s)
-                       (if (= who :home)
+                       (if (= who ::home)
                          (who-has (total-points (conj scores s)) opp-points board)
                          (who-has opp-points (total-points (conj scores s)) board))))]
     (map mapper possible)))

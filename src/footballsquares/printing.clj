@@ -1,5 +1,5 @@
 ;;Copyright © 2020 Steven Katz
-(in-ns 'footballsquares.core)
+(in-ns 'footballsquares.main)
 
 (defn- padr [s x]
   (format (str "%-" s "s") x))
@@ -25,9 +25,9 @@
         (println (padr 10 (who-has x y c)))
         (print (padr 10 (who-has x y c)))))))
 
-(defn- print-game [{{{h-n :name h-s :score} :home
-                     {a-n :name a-s :score} :away} :teams
-                    board                          :board}]
+(defn- print-game [{{{h-n ::fsc/name h-s ::fsc/score} ::fsc/home
+                     {a-n ::fsc/name a-s ::fsc/score} ::fsc/away} ::fsc/teams
+                    board                          ::fsc/board}]
   (let [h-points (total-points h-s)
         a-points (total-points a-s)]
     (header (str " <-------" h-n ": " h-points))
@@ -36,5 +36,5 @@
     (footer (str a-n ": " a-points))
     (println)
     (println (str "Winner: " (who-has h-points a-points board)))
-    (println (str h-n ":" (pr-str (reverse (map name h-s))) "\n  " (pr-str (predict :home h-s a-points board))))
-    (println (str a-n ":" (pr-str (reverse (map name a-s))) "\n  " (pr-str (predict :away a-s h-points board))))))
+    (println (str h-n ":" (pr-str (reverse (map name h-s))) "\n  " (pr-str (predict ::fsc/home h-s a-points board))))
+    (println (str a-n ":" (pr-str (reverse (map name a-s))) "\n  " (pr-str (predict ::fsc/away a-s h-points board))))))

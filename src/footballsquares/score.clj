@@ -37,9 +37,9 @@
      current-scores)))
 
 (defn do-score [m t sc]
-    (update-in m [t :score]
+    (update-in m [t ::score]
                #(score sc %)))
 
-(defn un-score [m t]
-    (update-in m [t :score]
+(defn undo-score [m t]
+    (update-in m [t ::score]
                #(if (empty? %) % (rest %))))
